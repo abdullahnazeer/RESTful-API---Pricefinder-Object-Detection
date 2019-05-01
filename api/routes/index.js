@@ -60,7 +60,9 @@ var imageLocation;
 
 function lastUpdated() {
 
-    const directoryPath = path.join('D:/Node-REST-API/', 'images');
+    const directoryPath = path.join(__dirname, '..', '..', 'images');
+
+    //const directoryPath = path.join('D:/Node-REST-API/', 'images');
 
     //Passing directoryPath and callback function
 
@@ -135,6 +137,8 @@ function awsUpload() {
 
 function customVision() {
 
+    directoryPath2 = path.join(__dirname, '..', '..', 'images');
+
     //Analyzation of Image using Azure Custom Vision
 
     analyzeImage("'" + imageLocation + "'");
@@ -146,7 +150,8 @@ function customVision() {
                 "Ocp-Apim-Subscription-Key": config_1.config.vision.key1,
                 "Prediction-Key": config_1.config.vision.key1
             },
-            body: fileHelpers.readImage('D:/Node-REST-API/images' + '/' + imageLocation)
+
+            body: fileHelpers.readImage(directoryPath2 + '/' + imageLocation)
         };
         request.post(requestOptions, function (err, response, body) {
             if (err) {
